@@ -25,7 +25,7 @@ class TCPServer(threading.Thread):
             msg = self.con.recv(1024)
             if not msg: break
             
-            print "in <-- ", client, msg
+            print "in <-- ", self.client, msg
 
             if msg == "Boa Tarde":
                 print "out --> Saudação: " + str(msg)
