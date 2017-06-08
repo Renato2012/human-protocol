@@ -54,7 +54,7 @@ class TCPServer(threading.Thread):
         
 # coding the socket
 tcp = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-# IP e porta do cliente ("" aceita qualquer cliente).
+# Aguarda cliente(s) com o IP ("" aceita qualquer cliente) e porta (33000).
 orig = ("", 33000)
 tcp.bind(orig)
 tcp.listen(50)
