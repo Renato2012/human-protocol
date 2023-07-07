@@ -1,5 +1,5 @@
 #!/usr/bin/python
-# coding=UTF-8
+#coding=UTF-8
 
 import threading
 import socket
@@ -20,36 +20,36 @@ class TCPServer(threading.Thread):
         self.saudacao = False
 
     def run(self):
-        print "\n\nConectado por " + str(self.client) + "\n"
+        print ("\n\nConectado por " + str(self.client) + "\n")
         while True:
             msg = self.con.recv(1024)
             if not msg: break
             
-            print "in <-- ", self.client, msg
+            print ("in <-- ", self.client, msg)
 
             if msg == "Boa Tarde":
-                print "out --> Saudação: " + str(msg)
+                print ("out --> Saudacao: " + str(msg))
                 self.con.send(msg)
                 self.saudacao = bool
 
             elif self.saudacao == bool and msg == "Horas":
                 hour = strftime("%H:%M:%S")
-                print "out --> Hora: " + str(hour)
+                print ("out --> Hora: " + str(hour))
                 self.con.send(hour)
 
             elif msg == "Obrigado":
                 #print "out --> " + msg
-                print "Comunicação concluida!"
+                print ("Comunicacao concluida!")
                 break	# sai do laço, finaliza comunicação com cliente
 
             else:
-                print "Error: Par não estabeleceu fase SAUDAÇÃO"
+                print ("Error: Par nao estabeleceu fase SAUDACAO")
                 #break	# sai do laço
                 #
-                print "WARNING: Aguardando estabelecimento da saudação"
+                print ("WARNING: Aguardando estabelecimento da saudacao")
                 self.con.send("NACK")
 
-        print "Finalizando conexão do cliente " + str(self.client) + "\n"
+        print ("Finalizando conexao do cliente " + str(self.client) + "\n")
         self.con.close()
         
 # coding the socket
@@ -60,13 +60,12 @@ tcp.bind(orig)
 tcp.listen(50)
 
 
-print "\t|#|----------------------------------------------|#|"
-print "\t|#| PROTOCOLO SAUDAÇÃO ---- Servidor em execução |#|"
-print "\t|#|----------------------------------------------|#|\n"
+print ("\t|#|----------------------------------------------|#|")
+print ("\t|#| PROTOCOLO SAUDACAO ---- Servidor em execucao |#|")
+print ("\t|#|----------------------------------------------|#|\n")
 
 
 while True:
     con, client = tcp.accept()
     thread = TCPServer(con, client)
     thread.start()
-
